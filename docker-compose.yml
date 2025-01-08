@@ -16,6 +16,7 @@ services:
       - DATABASE_URI=postgres://postgres:test@task-tracker-db:5432/test?schema=public
       - ADMIN_IDS=12345123 12345678
       - BOT_TOKEN=12345678:AbCdEfghi5bJdcX7xjCxaGrTW27_EaJ9kBw
+      - CRON_PATTERN=19 4,16 * * *
     depends_on:
       - task-tracker-db
     restart: always

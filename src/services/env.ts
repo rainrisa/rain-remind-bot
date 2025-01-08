@@ -11,6 +11,7 @@ const env = cleanEnv(process.env, {
   DATABASE_URI: str(),
   BOT_TOKEN: str(),
   ADMIN_IDS: numArr(),
+  CRON_PATTERN: str(),
 });
 
 export default env;
