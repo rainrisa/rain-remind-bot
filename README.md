@@ -1,6 +1,6 @@
-# Task Tracker Bot
+# Rain Remind Bot
 
-Hello, this is my personal bot for tracking tasks! There may still be some errors, so if you find any, please report them to me, and I’ll see if I can fix them.
+My personal reminder bot, mostly for Japanese vocabulary, This is a fork of [rainrisa/task-tracker-bot](https://github.com/rainrisa/task-tracker-bot) with cron feature
 
 ## Database Information
 
