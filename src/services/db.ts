@@ -16,6 +16,14 @@ export class DB {
     });
   }
 
+  async deleteTask(taskId: number) {
+    return this.prisma.task.delete({
+      where: {
+        id: taskId,
+      },
+    });
+  }
+
   async getAllTasks() {
     return this.prisma.task.findMany({
       where: {

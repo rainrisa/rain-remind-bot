@@ -13,6 +13,7 @@ const commands: BotCommand[] = [
   { command: "random", description: "Get random undone task" },
   { command: "done", description: "Mark a task as done" },
   { command: "undone", description: "Mark a task as undone" },
+  { command: "delete", description: "Remove a task" },
 ];
 bot.use((ctx, next) => {
   const fromId = ctx.from?.id;
@@ -51,6 +52,11 @@ bot.command("done", async (ctx) => {
 bot.command("undone", async (ctx) => {
   const ids = ctx.message?.text.split(" ").slice(1).map(Number) || [];
   await Promise.all(ids.map((id) => db.markAsUndone(id)));
+  await ctx.reply("Ok");
+});
+bot.command("delete", async (ctx) => {
+  const ids = ctx.message?.text.split(" ").slice(1).map(Number) || [];
+  await Promise.all(ids.map((id) => db.deleteTask(id)));
   await ctx.reply("Ok");
 });
 bot.on("msg:text", async (ctx) => {
