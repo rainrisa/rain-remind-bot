@@ -17,6 +17,7 @@
     "envalid": "^8.0.0",
     "grammy": "^1.30.0",
     "node-cron": "^3.0.3",
+    "openai": "^4.77.4",
     "prisma": "^5.20.0"
   },
   "devDependencies": {
