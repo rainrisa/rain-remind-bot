@@ -14,7 +14,7 @@ const env = cleanEnv(process.env, {
   CRON_PATTERN: str(),
   OPENAI_API_KEY: str({ default: undefined }),
   OPENAI_BASE_URL: str({ default: undefined }),
-  PROMPT_SENTENCE: str({ default: undefined }),
+  PROMPT_TEXT: str({ default: undefined }),
 });
 
 export default env;

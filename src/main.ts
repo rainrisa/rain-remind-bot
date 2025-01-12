@@ -71,7 +71,7 @@ bot.on("callback_query", async (ctx) => {
 
     if (message) {
       const instruction =
-        env.PROMPT_SENTENCE ||
+        env.PROMPT_TEXT ||
         "Generate english text using these vocabularies.\n" +
           "Just send me the text without anything else";
       const sentence = await ai?.ask(message.text + "\n\n" + instruction);
