@@ -5,6 +5,7 @@ import db from "./services/db.js";
 import format from "./extra/format.js";
 import disablePreview from "./plugins/disablePreview.js";
 import cron from "./services/cron.js";
+import ai from "./services/ai.js";
 
 const bot = new Bot(env.BOT_TOKEN);
 const commands: BotCommand[] = [
@@ -63,6 +64,25 @@ bot.on("msg:text", async (ctx) => {
   const text = ctx.message?.text;
   const task = text && (await db.addTask(text));
   task && (await ctx.reply(format([task])));
+});
+bot.on("callback_query", async (ctx) => {
+  if (ctx.callbackQuery.data === "generate-sentence") {
+    const message = ctx.callbackQuery.message;
+
+    if (message) {
+      const instruction =
+        env.PROMPT_TEXT ||
+        "Generate english text using these vocabularies.\n" +
+          "Just send me the text without anything else";
+      const sentence = await ai?.ask(message.text + "\n\n" + instruction);
+
+      await ctx.api.editMessageText(
+        message.chat.id,
+        message.message_id,
+        message.text + "\n\n" + sentence,
+      );
+    }
+  }
 });
 bot.api.setMyCommands(commands);
 bot.start();
