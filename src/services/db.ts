@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Task } from "@prisma/client";
 
 export class DB {
   prisma: PrismaClient;
@@ -44,6 +44,14 @@ export class DB {
     if (tasks.length === 0) return null;
     const randomIndex = Math.floor(Math.random() * tasks.length);
     return tasks[randomIndex];
+  }
+
+  async getRandomTasks(limit = 5) {
+    // prisma does not support this so we have to use a raw query
+    // https://github.com/prisma/prisma/issues/5894
+    return db.prisma.$queryRaw<
+      Task[]
+    >`SELECT * FROM "Task" WHERE done = false ORDER BY random() LIMIT ${limit};`;
   }
 
   async getOldestTask() {
