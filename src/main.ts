@@ -6,6 +6,7 @@ import format from "./extra/format.js";
 import disablePreview from "./plugins/disablePreview.js";
 import cron from "./services/cron.js";
 import ai from "./services/ai.js";
+import sendRandom from "./services/sendRandom.js";
 
 const bot = new Bot(env.BOT_TOKEN);
 const commands: BotCommand[] = [
@@ -42,8 +43,7 @@ bot.command("get_all", async (ctx) => {
   tasks.length && (await ctx.reply(format(tasks)));
 });
 bot.command("random", async (ctx) => {
-  const task = await db.getRandomTask();
-  task && (await ctx.reply(format([task])));
+  await sendRandom(bot);
 });
 bot.command("done", async (ctx) => {
   const ids = ctx.message?.text.split(" ").slice(1).map(Number) || [];
